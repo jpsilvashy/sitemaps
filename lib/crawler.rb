@@ -15,7 +15,7 @@ module Crawler
     crawled_pages = Set.new
 
     # assets
-    assets = %w[ jpeg jpg gif js css png pdf ]
+    assets = %w[ jpeg jpg gif js css png pdf css js gz ]
 
     crawl_uri = ->(page_uri) do
       unless crawled_pages.include?(page_uri)
