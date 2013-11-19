@@ -2,6 +2,21 @@
 
 <ul>
 <% @site_map.pages.each do |page| %>
-  <li><%= page.uri %> (<%= page.asset_type %>)</li>
+  <li>
+    <p class='page-uri'><%= page.uri %></p>
+
+    <ul class="links">
+    <% page.links.each do |link| %>
+      <li><%= link.uri %></li>
+    <% end %>
+    </ul>
+
+    <ul class="assets">
+    <% page.assets.each do |asset| %>
+      <li><%= asset.uri %></li>
+    <% end %>
+    </ul>
+
+  </li>
 <% end %>
 </ul>

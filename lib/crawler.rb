@@ -58,14 +58,14 @@ module Crawler
           # Crawl all the uris
           puts " links:"
           uris.each do |uri|
-            # site_map.pages.create(uri: uri, asset_type: 'link')
+            page.links.create(uri: uri)
             puts "  #{uri}"
             crawl_uri.call(uri)
           end
 
-          puts " collected_assets:"
+          puts " collected_assets:" if collected_assets
           collected_assets.each do |collected_asset|
-            # site_map.pages.create(uri: collected_asset, asset_type: 'asset')
+            page.assets.create(uri: collected_asset)
             puts "  #{collected_asset}"
           end
 

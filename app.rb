@@ -34,9 +34,13 @@ set :views, Proc.new { File.join(root, "app/views") }
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3::memory:")
 
 # Models
-require_relative 'app/models/page'
-require_relative 'app/models/site_page'
 require_relative 'app/models/site_map'
+require_relative 'app/models/page'
+require_relative 'app/models/asset'
+require_relative 'app/models/link'
+
+
+# require_relative 'app/models/site_page'
 
 # Finalize DataMapper after initializing models
 DataMapper.finalize.auto_migrate!

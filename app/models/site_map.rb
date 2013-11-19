@@ -8,5 +8,5 @@ class SiteMap
   property :title, String, length: 256
 
   has n, :pages
-  has n, :site_pages
+  # has n, :site_pages
 end
