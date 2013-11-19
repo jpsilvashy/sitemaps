@@ -5,7 +5,7 @@ module Crawler
   require 'nokogiri'
   require 'open-uri'
 
-  def self.run_crawler( start_page, &page )
+  def self.run_crawler( start_page, &each_page )
 
     start_uri = URI.parse(start_page)
 
@@ -27,10 +27,10 @@ module Crawler
           html = Nokogiri.HTML(open(page_uri))
 
           # Yield html and page_uri into the block
-          page.call(html, page_uri)
+          each_page.call(html, page_uri)
 
           # Find all the links on the page
-          links = doc.css('a[href]').map{ |a| a['href'] }
+          links = html.css('a[href]').map{ |a| a['href'] }
 
           # Make these URIs, make into array, throw out ones that URI doesn't understand
           uris = links.map{ |href| URI.join( page_uri, href ) rescue nil }.compact
@@ -58,5 +58,6 @@ module Crawler
     # start the crawler
     crawl_uri.call( start_uri )
   end
+
 
 end

@@ -21,17 +21,17 @@ require 'data_mapper'
 set server: 'thin', connections: []
 set :views, Proc.new { File.join(root, "app/views") }
 
-# Headers
-set :allow_origin, :any
-set :allow_methods, [:get, :post, :options]
-set :allow_credentials, true
-set :max_age, "1728000"
+# # Headers
+# set :allow_origin, :any
+# set :allow_methods, [:get, :post, :options]
+# set :allow_credentials, true
+# set :max_age, "1728000"
 
 # Allow CORS
-set :protection, :except => :http_origin
+# set :protection, :except => :http_origin
 
 # Setup DataMapper
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3::memory:")
+DataMapper.setup(:default, "postgres://psnskuqwigodwo:lOPBYS_WSr6EZw0QhlMxE1TZX_@ec2-54-204-43-138.compute-1.amazonaws.com:5432/d4igk9cds05pq9")
 
 # Models
 require_relative 'app/models/site_map'

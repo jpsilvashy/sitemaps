@@ -8,6 +8,15 @@ html {
   background: #EEF2DC;
 }
 
+header {
+
+}
+
+body {
+  padding: 20px;
+  font-family: "helvetica", 'san-serif';
+}
+
 form {
   margin:20px;
   position: relative;

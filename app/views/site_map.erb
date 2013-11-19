@@ -1,3 +1,8 @@
+<ul>
 <% @results.each do |result| %>
-  <%= result.uri %>
+  <li>
+    <%= result %>
+    (<%= result.class %>)
+  </ul>
 <% end %>
+</ul>

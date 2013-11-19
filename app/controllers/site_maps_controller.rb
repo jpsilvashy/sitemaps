@@ -15,14 +15,14 @@ get '/site_maps/:id' do
 
   @site_map = SiteMap.get(params[:id].to_i)
 
-  # @results = Crawler.run_crawler(@site_map.uri) do |page, uri|
-  #   puts "page ======================================"
-  #   puts page
-  #   puts uri
-  #   puts
-  # end
+  @uris = []
 
-  @results = Crawler.run_crawler(@site_map.uri)
+  @results = Crawler.run_crawler(@site_map.uri) do |page, uri|
+    puts page.class
+    puts uri.class
+
+    @uris << uri
+  end
 
   erb :site_map
 
