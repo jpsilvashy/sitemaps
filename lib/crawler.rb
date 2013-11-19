@@ -21,7 +21,7 @@ module Crawler
       unless crawled_pages.include?(page_uri)
 
         puts "New page for: #{page_uri}"
-        page = site_map.pages.create(uri: uri)
+        page = site_map.pages.create(uri: page_uri)
 
         # inster into set so we don't crawl it again
         crawled_pages << page_uri
