@@ -17,6 +17,9 @@ require 'yaml'
 require 'sanitize'
 require 'data_mapper'
 
+require 'resque'
+require 'redis'
+
 # Settings
 set server: 'thin', connections: []
 set :views, Proc.new { File.join(root, "app/views") }
@@ -50,3 +53,4 @@ require_relative 'app/controllers/pages_controller'
 
 # Crawler
 require_relative 'lib/crawler'
+require_relative 'lib/worker'

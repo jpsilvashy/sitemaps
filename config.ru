@@ -1,6 +1,6 @@
-require './app'
+require './app.rb'
+require 'resque/server'
 
-# required for heroku streaming logs to work
-$stdout.sync = true
-
-run Sinatra::Application
+run Rack::URLMap.new \
+  "/"       => Sinatra::Application,
+  "/resque" => Resque::Server.new

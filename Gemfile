@@ -20,6 +20,9 @@ gem 'nokogiri'
 
 gem 'data_mapper'
 
+gem 'shotgun'
+gem 'resque'
+
 group :production do
   gem 'dm-postgres-adapter'
 end

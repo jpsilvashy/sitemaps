@@ -60,7 +60,10 @@ module Crawler
           uris.each do |uri|
             page.links.create(uri: uri)
             puts "  #{uri}"
-            crawl_uri.call(uri)
+
+            Thread.new do
+              crawl_uri.call(uri)
+            end
           end
 
           puts " collected_assets:" if collected_assets
