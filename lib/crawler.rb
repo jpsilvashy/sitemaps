@@ -55,7 +55,7 @@ module Crawler
 
           # Crawl all the uris
           uris.each do |uri|
-            site_map.pages.create(uri: uri, asset_type: 'link')
+            site_map.pages.first_or_create(uri: uri, asset_type: 'link')
             puts " #{uri}"
             crawl_uri.call(uri)
           end
