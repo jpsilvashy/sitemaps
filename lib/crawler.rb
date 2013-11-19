@@ -58,7 +58,7 @@ module Crawler
           # Crawl all the uris
           puts " links:"
           uris.each do |uri|
-            page.links.create(uri: uri)
+            page.links.first_or_create(uri: uri)
             puts "  #{uri}"
 
             Thread.new do
@@ -68,7 +68,7 @@ module Crawler
 
           puts " collected_assets:" if collected_assets
           collected_assets.each do |collected_asset|
-            page.assets.create(uri: collected_asset)
+            page.assets.first_or_create(uri: collected_asset)
             puts "  #{collected_asset}"
           end
 
