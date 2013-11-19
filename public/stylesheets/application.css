@@ -6,6 +6,7 @@
 
 html {
   background: #EEF2DC;
+  color: #33342d;
 }
 
 header {
@@ -34,11 +35,30 @@ header h2 {
   font-weight: 100;
 }
 
+h3 {
+  width: 100%;
+  text-align: center;
+  color:#16aace;
+  font-size: 24px;
+  font-weight: 100;
+  float: left;
+  clear: left;
+}
+
+h4 {
+  /*color: #e54816;*/
+}
+
 /* tree */
 ul.links,
 ul.assets {
-  /*background: red;*/
-  margin-left: 20px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+
+ul.links li,
+ul.assets li {
+  margin-bottom: 3px;
 }
 
 ul.assets {
@@ -52,6 +72,7 @@ ul.assets {
 .page-uri {
   font-size: 18px;
   font-weight: normal;
+  margin-bottom: 10px;
 }
 
 #create-form {

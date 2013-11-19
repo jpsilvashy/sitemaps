@@ -1,13 +1,12 @@
-<h2>Site map for: <%= @site_map.hostname %></h2>
+<h3>Site map for: <%= @site_map.hostname %></h3>
 
 <% @site_map.pages.each do |page| %>
 <div class='page'>
-  <h4 class='page-uri'><%= page.uri %></h4>
+  <h4 class='page-uri'><strong>Page: </strong><%= URI.parse(page.uri).path %></h4>
 
-  <h5>Links:</h5>
   <ul class="links">
     <% page.links.each do |link| %>
-    <li><%= link.uri %></li>
+    <li><%= URI.parse(link.uri).path %></li>
     <% end %>
   </ul>
 
@@ -15,7 +14,7 @@
   <h5>Assets:</h5>
   <ul class="assets">
     <% page.assets.each do |asset| %>
-    <li><%= asset.uri %></li>
+    <li><%= URI.parse(asset.uri).path%></li>
     <% end %>
   </ul>
   <% end %>
