@@ -35,16 +35,37 @@ header h2 {
 }
 
 /* tree */
-ul.links {
-  background: red;
+ul.links,
+ul.assets {
+  /*background: red;*/
+  margin-left: 20px;
 }
 
 ul.assets {
-  background: blue;
+  /*background: blue;*/
 }
 
 .page {
   margin-bottom: 20px;
+}
+
+.page-uri {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+#create-form {
+  width: 340px;
+  margin: 0 auto;
+}
+
+#create-form input {
+  float: left;
+  clear: left;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 18px;
+  padding: 10px 14px;
 }
 
 body {
