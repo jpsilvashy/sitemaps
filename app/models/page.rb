@@ -8,6 +8,5 @@ class Page
 
   property :asset_type, String, length: 256
 
-
-  # belongs_to :site_map
+  belongs_to :site_map
 end

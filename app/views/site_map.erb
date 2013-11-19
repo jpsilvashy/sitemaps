@@ -2,6 +2,6 @@
 
 <ul>
 <% @site_map.pages.each do |page| %>
-  <li><%= page.uri %></li>
+  <li><%= page.uri %> (<%= page.asset_type %>)</li>
 <% end %>
 </ul>

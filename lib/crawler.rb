@@ -9,9 +9,7 @@ module Crawler
 
     start_uri = URI.parse(start_page)
     site_map = SiteMap.first_or_create({ hostname: start_uri.host })
-    puts "site_map: #{site_map.id}"
-
-    puts site_map.save
+    puts "New site map for: #{start_uri}"
 
     # These are the pages we've already visited
     crawled_pages = Set.new
@@ -22,7 +20,8 @@ module Crawler
     crawl_uri = ->(page_uri) do
       unless crawled_pages.include?(page_uri)
 
-        puts "Crawling: #{page_uri}"
+        puts "New page for: #{page_uri}"
+        page = site_map.pages.create(uri: uri)
 
         # inster into set so we don't crawl it again
         crawled_pages << page_uri
@@ -48,17 +47,29 @@ module Crawler
           uris.select!{ |uri| uri.host == start_uri.host }
 
           # collect assets
-          collected_assets = uris.reject!{ |uri| assets.any?{ |extension| uri.path.end_with?(".#{extension}") } }
+          collected_assets = uris.select{ |uri| assets.any?{ |extension| uri.path.end_with?(".#{extension}") } }
+
+          # remove assets
+          uris.reject!{ |uri| assets.any?{ |extension| uri.path.end_with?(".#{extension}") } }
 
           # ignore page fragment links
           uris.each{ |uri| uri.fragment = nil }
 
           # Crawl all the uris
+          puts " links:"
           uris.each do |uri|
-            site_map.pages.first_or_create(uri: uri, asset_type: 'link')
-            puts " #{uri}"
+            # site_map.pages.create(uri: uri, asset_type: 'link')
+            puts "  #{uri}"
             crawl_uri.call(uri)
           end
+
+          puts " collected_assets:"
+          collected_assets.each do |collected_asset|
+            # site_map.pages.create(uri: collected_asset, asset_type: 'asset')
+            puts "  #{collected_asset}"
+          end
+
+          puts
 
         rescue OpenURI::HTTPError
           warn "Skipping invalid link #{page_uri}"
@@ -88,3 +99,4 @@ module Crawler
   end
 
 end
+
