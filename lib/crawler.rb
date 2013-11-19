@@ -13,11 +13,12 @@ module Crawler
     crawled_pages = Set.new
 
     # assets
-    assets = %w[ jpeg jpg gif js css png ]
+    assets = %w[ jpeg jpg gif js css png pdf ]
 
     crawl_uri = ->(page_uri) do
       unless crawled_pages.include?(page_uri)
 
+        puts
         puts "Crawling: #{page_uri}"
 
         # inster into set so we don't crawl it again
@@ -37,24 +38,28 @@ module Crawler
           # Make these URIs, make into array, throw out ones that URI doesn't understand
           uris = links.map{ |href| URI.join( page_uri, href ) rescue nil }.compact
 
+          external_links = uris.select{ |uri| uri.host != start_uri.host }
+
           # TODO: store links to external sites except facebook and instagram
           # only select links that have the same hostname
           uris.select!{ |uri| uri.host == start_uri.host }
 
           # collect assets
-          collected_assets = uris.select{ |uri| assets.any?{ |extension| uri.path.end_with?(".#{extension}") } }
-
-          puts "collected_assets ="
-          puts collected_assets
+          collected_assets = uris.reject!{ |uri| assets.any?{ |extension| uri.path.end_with?(".#{extension}") } }
 
           # ignore page fragment links
           uris.each{ |uri| uri.fragment = nil }
 
           # Crawl all the uris
           uris.each do |uri|
-            puts " links_on_this_page: #{uri}"
+            puts uri
             crawl_uri.call(uri)
           end
+
+          puts
+          puts "External_links:"
+          puts external_links
+          puts
 
         rescue OpenURI::HTTPError
           warn "Skipping invalid link #{page_uri}"
@@ -80,3 +85,5 @@ module Crawler
 # "http://www.jpsilvashy.com/"
 
 end
+
+# Crawler.run_test_crawl("http://www.jpsilvashy.com/")
