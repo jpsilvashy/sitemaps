@@ -13,6 +13,6 @@ get '/site_maps/:id' do
 
   @site_map = SiteMap.get(params[:id])
 
-  erb :site_map
+  erb :site_map, :locals => { :site_map => @site_map }
 
 end
