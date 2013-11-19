@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 
+gem 'foreman'
 gem 'rake'
 
 gem 'sinatra'
@@ -15,6 +16,7 @@ gem 'geocoder'
 gem 'sanitize'
 gem 'rabl'
 gem 'builder'
+gem 'nokogiri'
 
 gem 'data_mapper'
 

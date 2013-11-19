@@ -1,6 +1,8 @@
 post '/site_maps' do
 
-  @site_map = SiteMap.first_or_create({ uri: params['url'] })
+  @site_map = SiteMap.new({ uri: params['url'] })
+
+  @site_map.save
 
   puts "@site_map --------------"
   puts @site_map
@@ -11,8 +13,17 @@ end
 
 get '/site_maps/:id' do
 
-  @site_map = SiteMap.get(params[:id])
+  @site_map = SiteMap.get(params[:id].to_i)
 
-  erb :site_map, :locals => { :site_map => @site_map }
+  # @results = Crawler.run_crawler(@site_map.uri) do |page, uri|
+  #   puts "page ======================================"
+  #   puts page
+  #   puts uri
+  #   puts
+  # end
+
+  @results = Crawler.run_crawler(@site_map.uri)
+
+  erb :site_map
 
 end

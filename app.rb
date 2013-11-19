@@ -46,4 +46,5 @@ require_relative 'app/controllers/base_controller'
 require_relative 'app/controllers/site_maps_controller'
 require_relative 'app/controllers/pages_controller'
 
-
+# Crawler
+require_relative 'lib/crawler'
