@@ -18,6 +18,8 @@ module Crawler
     crawl_uri = ->(page_uri) do
       unless crawled_pages.include?(page_uri)
 
+        puts "Crawling: #{page_uri}"
+
         # inster into set so we don't crawl it again
         crawled_pages << page_uri
 
@@ -42,11 +44,17 @@ module Crawler
           # collect assets
           collected_assets = uris.select{ |uri| assets.any?{ |extension| uri.path.end_with?(".#{extension}") } }
 
+          puts "collected_assets ="
+          puts collected_assets
+
           # ignore page fragment links
           uris.each{ |uri| uri.fragment = nil }
 
           # Crawl all the uris
-          uris.each{ |uri| crawl_uri.call(uri) }
+          uris.each do |uri|
+            puts " links_on_this_page: #{uri}"
+            crawl_uri.call(uri)
+          end
 
         rescue OpenURI::HTTPError
           warn "Skipping invalid link #{page_uri}"
@@ -59,5 +67,16 @@ module Crawler
     crawl_uri.call( start_uri )
   end
 
+
+  def self.run_test_crawl(page_uri)
+    @results = Crawler.run_crawler(page_uri) do |page, uri|
+      # puts page.class
+      # puts uri
+      # puts
+    end
+  end
+
+
+# "http://www.jpsilvashy.com/"
 
 end
