@@ -1,1 +1,7 @@
 <h2>Site map for: <%= @site_map.hostname %></h2>
+
+<ul>
+<% @site_map.pages.each do |page| %>
+  <li><%= page.uri %></li>
+<% end %>
+</ul>

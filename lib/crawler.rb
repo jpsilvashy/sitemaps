@@ -82,6 +82,9 @@ module Crawler
       # puts uri
       # puts
     end
+
+    SiteMap.first({ hostname: URI.parse(page_uri).host })
+
   end
 
 end

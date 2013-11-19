@@ -39,8 +39,8 @@ require_relative 'app/models/site_page'
 require_relative 'app/models/site_map'
 
 # Finalize DataMapper after initializing models
-DataMapper.finalize.auto_migrate!
-
+DataMapper.finalize
+DataMapper.auto_upgrade!
 
 # Controllers
 require_relative 'app/controllers/base_controller'
