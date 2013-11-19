@@ -2,7 +2,7 @@ post '/site_maps' do
 
   @site_map = SiteMap.create({ uri: params['url'] })
 
-  Crawler.create_site_map_for(@site_map.uri)
+  Crawler.create_site_map_for(@site_map.uri.to_s)
 
   redirect "/site_maps/#{@site_map.id}"
 

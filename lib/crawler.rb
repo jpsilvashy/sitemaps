@@ -9,6 +9,7 @@ module Crawler
 
     start_uri = URI.parse(start_page)
     site_map = SiteMap.first_or_create({ hostname: start_uri.host })
+    puts "site_map: #{site_map.id}"
 
     puts site_map.save
 
