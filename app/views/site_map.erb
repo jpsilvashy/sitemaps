@@ -1,22 +1,24 @@
 <h2>Site map for: <%= @site_map.hostname %></h2>
 
-<ul>
 <% @site_map.pages.each do |page| %>
-  <li>
-    <p class='page-uri'><%= page.uri %></p>
+<div class='page'>
+  <h4 class='page-uri'><%= page.uri %></h4>
 
-    <ul class="links">
+  <h5>Links:</h5>
+  <ul class="links">
     <% page.links.each do |link| %>
-      <li><%= link.uri %></li>
+    <li><%= link.uri %></li>
     <% end %>
-    </ul>
+  </ul>
 
-    <ul class="assets">
+  <% if page.assets.present? %>
+  <h5>Assets:</h5>
+  <ul class="assets">
     <% page.assets.each do |asset| %>
-      <li><%= asset.uri %></li>
+    <li><%= asset.uri %></li>
     <% end %>
-    </ul>
+  </ul>
+  <% end %>
 
-  </li>
+</div>
 <% end %>
-</ul>

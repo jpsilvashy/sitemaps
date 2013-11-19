@@ -43,6 +43,10 @@ ul.assets {
   background: blue;
 }
 
+.page {
+  margin-bottom: 20px;
+}
+
 body {
   padding: 20px;
   font-family: "helvetica", 'san-serif';
