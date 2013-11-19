@@ -35,24 +35,24 @@ module Crawler
           each_page.call(html, page_uri)
 
           # Find all the links on the page
-          links = html.css('a[href]').map{ |a| a['href'] }
+          links = html.css('[href]').map{ |a| a['href'] }
 
           # Make these URIs, make into array, throw out ones that URI doesn't understand
           uris = links.map{ |href| URI.join( page_uri, href ) rescue nil }.compact
 
+          # These are all external links
           external_links = uris.select{ |uri| uri.host != start_uri.host }
 
-          # TODO: store links to external sites except facebook and instagram
-          # only select links that have the same hostname
+          # Only select links that have the same hostname
           uris.select!{ |uri| uri.host == start_uri.host }
 
-          # collect assets
+          # Collect assets
           collected_assets = uris.select{ |uri| assets.any?{ |extension| uri.path.end_with?(".#{extension}") } }
 
-          # remove assets
+          # Remove assets
           uris.reject!{ |uri| assets.any?{ |extension| uri.path.end_with?(".#{extension}") } }
 
-          # ignore page fragment links
+          # Ignore page fragment links
           uris.each{ |uri| uri.fragment = nil }
 
           # Crawl all the uris
