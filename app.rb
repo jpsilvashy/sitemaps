@@ -31,15 +31,16 @@ set :views, Proc.new { File.join(root, "app/views") }
 # set :protection, :except => :http_origin
 
 # Setup DataMapper
-DataMapper.setup(:default, "postgres://psnskuqwigodwo:lOPBYS_WSr6EZw0QhlMxE1TZX_@ec2-54-204-43-138.compute-1.amazonaws.com:5432/d4igk9cds05pq9")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3::memory:")
 
 # Models
-require_relative 'app/models/site_map'
 require_relative 'app/models/page'
+require_relative 'app/models/site_page'
+require_relative 'app/models/site_map'
 
 # Finalize DataMapper after initializing models
-DataMapper.finalize
-DataMapper.auto_upgrade!
+DataMapper.finalize.auto_migrate!
+
 
 # Controllers
 require_relative 'app/controllers/base_controller'
