@@ -19,6 +19,7 @@ require 'data_mapper'
 
 # Settings
 set server: 'thin', connections: []
+set :views, Proc.new { File.join(root, "app/views") }
 
 # Headers
 set :allow_origin, :any
