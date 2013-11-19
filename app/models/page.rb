@@ -4,10 +4,7 @@ class Page
   property :id, Serial
 
   property :uri, URI, length: 256
-
-  # property :ip_address, IPAddress
-  # property :created_at, DateTime
+  # property :title, String, length: 256
 
   belongs_to :site_map
-
 end

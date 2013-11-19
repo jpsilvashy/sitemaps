@@ -19,7 +19,12 @@ module Crawler
       unless crawled_pages.include?(page_uri)
 
         puts
+
+        page = Page.create({ uri: page_uri.to_s })
+        page.save
+
         puts "Crawling: #{page_uri}"
+        puts page
 
         # inster into set so we don't crawl it again
         crawled_pages << page_uri
@@ -56,10 +61,10 @@ module Crawler
             crawl_uri.call(uri)
           end
 
-          puts
-          puts "External_links:"
-          puts external_links
-          puts
+          # puts
+          # puts "External_links:"
+          # puts external_links
+          # puts
 
         rescue OpenURI::HTTPError
           warn "Skipping invalid link #{page_uri}"
@@ -74,6 +79,12 @@ module Crawler
 
 
   def self.run_test_crawl(page_uri)
+
+    site_map = SiteMap.create({ uri: page_uri })
+
+    puts "site_map -------------"
+    puts site_map
+
     @results = Crawler.run_crawler(page_uri) do |page, uri|
       # puts page.class
       # puts uri
