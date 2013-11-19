@@ -59,7 +59,6 @@ module Crawler
             crawl_uri.call(uri)
           end
 
-
         rescue OpenURI::HTTPError
           warn "Skipping invalid link #{page_uri}"
         end
@@ -72,7 +71,7 @@ module Crawler
   end
 
 
-  def self.run_test_crawl(page_uri)
+  def self.create_site_map_for(page_uri)
 
     puts "making site_map for: #{URI.parse(page_uri).host}"
     puts URI.parse(page_uri).host
@@ -84,9 +83,4 @@ module Crawler
     end
   end
 
-
-# "http://www.jpsilvashy.com/"
-
 end
-
-# Crawler.run_test_crawl("http://www.jpsilvashy.com/")
