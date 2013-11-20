@@ -61,9 +61,9 @@ module Crawler
             page.links.first_or_create(uri: uri)
             puts "  #{uri}"
 
-            Thread.new do
+            # Thread.new do
               crawl_uri.call(uri)
-            end
+            # end
           end
 
           puts " collected_assets:" if collected_assets
